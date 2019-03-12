@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains team_scheduler.module.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function team_scheduler_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the team_scheduler module.
+    case 'help.page.team_scheduler':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Schedules teams for festivals') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function team_scheduler_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'team_scheduler/team_scheduler';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function team_scheduler_theme() {
+  return [
+    'team_scheduler' => [
+      'variables' => [
+        'matches' => null
+      ]
+    ]
+  ];
+}

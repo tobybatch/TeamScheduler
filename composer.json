@@ -1,0 +1,14 @@
+{
+  "name": "drupal/team_scheduler",
+  "type": "drupal-module",
+  "description": "Schedules teams for festivals",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/team_scheduler",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/team_scheduler",
+    "source": "http://cgit.drupalcode.org/team_scheduler"
+  },
+  "require": { }
+}

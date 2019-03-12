@@ -1,0 +1,18 @@
+
+team_scheduler.default_controller_agegroup:
+  path: '/team_scheduler/{id}'
+  defaults:
+    _controller: '\Drupal\team_scheduler\Controller\DefaultController::index'
+    _title: 'Team Scheduler'
+    id: -1
+  requirements:
+    _permission: 'access content'
+
+team_scheduler.default_form:
+  path: '/team_scheduler/form/default'
+  defaults:
+    _form: '\Drupal\team_scheduler\Form\DefaultForm'
+    _title: 'DefaultForm'
+  requirements:
+    _access: 'TRUE'
+  

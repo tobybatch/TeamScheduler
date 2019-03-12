@@ -1,0 +1,7 @@
+team_scheduler:
+  pitch_count: 4
+  pool_count: 4
+  game_length_minutes: 15
+  start_time: "10:15"
+  teams: "Norwich 1\nNorwich 2\nNorth Walsham\nWymondham"
+  shuffle: No

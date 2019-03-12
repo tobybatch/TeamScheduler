@@ -1,0 +1,7 @@
+name: 'Team Scheduler'
+type: module
+description: 'Schedules teams for festivals'
+dependencies:
+  - pathauto
+core: 8.x
+package: 'NRFC'

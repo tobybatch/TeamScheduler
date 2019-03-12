@@ -1,0 +1,25 @@
+<div class="team_scheduler">
+    <div class='pools'>
+        <h2>Pools</h2>
+        {% for pool in matches.pools %}
+            <div class="pool">
+                <h3>Pool {{ loop.index }}</h3>
+                {% for team in pool %}
+                    <p class='team'>{{ team }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class='pitches'>
+        <h2>Pitches</h2>
+        {% for pitch in matches.pitches %}
+            <div class="pitch">
+                <h3>Pitch {{ loop.index }}</h3>
+                {% for game in pitch %}
+                    <p class="game">{{ matches.gameTimes[loop.index] | date('H:i') }} {{ game.teamA }} vs {{ game.teamB }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
