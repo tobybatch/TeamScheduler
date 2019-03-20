@@ -17,7 +17,9 @@
             <div class="pitch">
                 <h3>Pitch {{ loop.index }}</h3>
                 {% for game in pitch %}
-                    <p class="game">{{ matches.gameTimes[loop.index] | date('H:i') }} {{ game.teamA }} vs {{ game.teamB }}</p>
+                    <p class="game">
+                      {{ matches.gameTimes[loop.index] | date('H:i') }} {{ game[0] }} vs {{ game[1] }}
+                    </p>
                 {% endfor %}
             </div>
         {% endfor %}

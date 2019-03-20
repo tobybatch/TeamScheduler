@@ -1,0 +1,7 @@
+<div>
+    {% for name in saved_games %}
+        <p>
+      <a href="{{ path('team_scheduler.default_controller_agegroup', { 'id': name }) }}">{{ name }}</a>
+        </p>
+    {% endfor %}
+</div>

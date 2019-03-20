@@ -4,7 +4,7 @@ team_scheduler.default_controller_agegroup:
   defaults:
     _controller: '\Drupal\team_scheduler\Controller\DefaultController::index'
     _title: 'Team Scheduler'
-    id: -1
+    id: 0
   requirements:
     _permission: 'access content'
 

@@ -31,3 +31,13 @@
   padding: 10px;
   margin: 20px;
 }
+
+#edit-pitch-count, #edit-pool-count, #edit-game-length-minutes, #edit-start-time {
+	width: 100px;
+}
+
+#default-form label {
+  float: left;
+  width: 100px;
+  vertical-align: middle;
+}
