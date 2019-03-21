@@ -1,4 +1,4 @@
-<div class="team_scheduler">
+<div class="team_scheduler" data-matches='{{ matches|json_encode() }}'>
     <div class='pools'>
         <h2>Pools</h2>
         {% for pool in matches.pools %}
@@ -23,5 +23,27 @@
                 {% endfor %}
             </div>
         {% endfor %}
+    </div>
+    <div style='clear: both'>
+        <ul>
+        <li>There are a number of teams split into pools.</li>
+        <li>Each pool only play teams with in it's pool.</li>
+        <li>Pools will contain between 4 and 7 teams</li>
+        <li>Within each pool each team plays all the other teams.</li>
+        </ul>
+
+        <ul>
+        <li>Having generated the games list (AvB, AvC, AvD, AvE, BvC ... etc) the games need to be arranged and split bettween a list of pitches.</li>
+        <li>The number of pitches is fixed.</li>
+        <li>The number of pools, therefore the number of teams can be changed.</li>
+        <li>No team can play on two pitches at the same time.</li>
+        <li>The goal is to prevent a teamplaying back to back, e.g (AvB, BvC etc)</li>
+        <li>The secondary goal is to prevent log breaks between games.</li>
+        <li>We could fix a sinle pool to a single pitch</li>
+        </ul>
+        
+    </div>
+    <div style='clear: both'>
+        <pre>jQuery('.team_scheduler').data('matches');</pre>
     </div>
 </div>

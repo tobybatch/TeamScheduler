@@ -123,13 +123,22 @@ class DefaultForm extends FormBase {
     if (! \is_dir($file_system->realpath(dirname($streamuri)))) {
       $file_system->mkdir($uri_stub, 0755, True);
     }
-    file_save_data(json_encode($data, JSON_PRETTY_PRINT), $streamuri, 1);
+    // I can't get FILE_EXISTS_REPLACE to work so blat the file first
+    $_filepath = $file_system->realpath($streamuri);
+    if (file_exists($_filepath)) {
+        unlink($_filepath);
+    }
+    if (file_save_data(json_encode($data, JSON_PRETTY_PRINT), $streamuri, FILE_EXISTS_REPLACE)) {
+      drupal_set_message("Data saved to " . $streamuri);
+    } else {
+      drupal_set_message("Failed to save to " . $streamuri, 'error');
+    }
   }
 
   private function process($pitchCount, $poolCount, $gameTime, $startTime, array $teams) {
+    $_matches = [];
     // Sort the teams so we try to avoid teams in the same group
-    sort($teams);
-    dpm("pitchCount = $pitchCount, poolCount = $poolCount, gameTime = $gameTime, startTime = $startTime");
+    \sort($teams);
 
     // Split teams into pools
     $gameTimes = $this->generateGameTimes($startTime, $gameTime);
@@ -143,7 +152,7 @@ class DefaultForm extends FormBase {
     foreach ($pools as $pool) {
       $gameList[] = $this->generateGames($pool);
     }
-    dpm($gameList, 'gameList');
+    $_matches['gameList'] = $gameList;
 
     $matches = [];
     $index = 0;
@@ -161,11 +170,10 @@ class DefaultForm extends FormBase {
       }
     }
 
-    return [
-      'pools' => $pools,
-      'pitches' => $matches,
-      'gameTimes' => $gameTimes
-    ];
+    $_matches['pools'] = $pools;
+    $_matches['pitches'] = $matches;
+    $_matches['gameTimes'] = $gameTimes;
+    return $_matches;
   }
 
   /**
@@ -205,5 +213,4 @@ class DefaultForm extends FormBase {
     }
     return $kos;
   }
-
 }

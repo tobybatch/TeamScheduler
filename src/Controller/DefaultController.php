@@ -43,7 +43,8 @@ class DefaultController extends ControllerBase {
       'matches' => [
         '#theme' => 'team_scheduler',
         '#matches' => $matches
-      ]
+      ],
+      '#cache' => ['max-age' => 0],
     ];
 
     return $render;
