@@ -22,6 +22,9 @@ class DefaultForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form = [];
+    $form['#cache'] = ['max-age' => 0];
+
     $form['age_group'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Age group'),
@@ -111,8 +114,8 @@ class DefaultForm extends FormBase {
     ];
 
     // Now generate the matches
-    // TODO: allow a varied number of pools. Right now pools = pitches
-    $matches = $this->process($data['pitch_count'], $data['pool_count'], $data['game_length_minutes'], $data['start_time'], $data['teams']);
+    $teams = array_filter(array_map('trim', $data['teams']));
+    $matches = $this->process($data['pitch_count'], $data['pool_count'], $data['game_length_minutes'], $data['start_time'], $teams);
     // Add those matches to the data array
     $data['matches'] = $matches;
 
@@ -133,6 +136,8 @@ class DefaultForm extends FormBase {
     } else {
       drupal_set_message("Failed to save to " . $streamuri, 'error');
     }
+
+    $form_state->setRedirect('team_scheduler.default_controller_agegroup', ['id' => $filename]);
   }
 
   private function process($pitchCount, $poolCount, $gameTime, $startTime, array $teams) {
@@ -158,7 +163,7 @@ class DefaultForm extends FormBase {
     $index = 0;
     while (\count($gameList) > 0) {
       $index ++;
-      if ($index > 300) {
+      if ($index > 35) {
         break;
       }
       $game_count = \count($gameList);

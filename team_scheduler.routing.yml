@@ -6,7 +6,7 @@ team_scheduler.default_controller_agegroup:
     _title: 'Team Scheduler'
     id: 0
   requirements:
-    _permission: 'access content'
+      _role: 'authenticated'
 
 team_scheduler.default_form:
   path: '/team_scheduler/form/default'
@@ -14,5 +14,5 @@ team_scheduler.default_form:
     _form: '\Drupal\team_scheduler\Form\DefaultForm'
     _title: 'DefaultForm'
   requirements:
-    _access: 'TRUE'
+      _role: 'authenticated'
   
