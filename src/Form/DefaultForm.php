@@ -23,7 +23,9 @@ class DefaultForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = [];
-    $form['#cache'] = ['max-age' => 0];
+    $form['#cache'] = [
+      'max-age' => 0
+    ];
 
     $form['age_group'] = [
       '#type' => 'textfield',
@@ -129,7 +131,7 @@ class DefaultForm extends FormBase {
     // I can't get FILE_EXISTS_REPLACE to work so blat the file first
     $_filepath = $file_system->realpath($streamuri);
     if (file_exists($_filepath)) {
-        unlink($_filepath);
+      unlink($_filepath);
     }
     if (file_save_data(json_encode($data, JSON_PRETTY_PRINT), $streamuri, FILE_EXISTS_REPLACE)) {
       drupal_set_message("Data saved to " . $streamuri);
@@ -137,7 +139,9 @@ class DefaultForm extends FormBase {
       drupal_set_message("Failed to save to " . $streamuri, 'error');
     }
 
-    $form_state->setRedirect('team_scheduler.default_controller_agegroup', ['id' => $filename]);
+    $form_state->setRedirect('team_scheduler.default_controller_agegroup', [
+      'id' => $filename
+    ]);
   }
 
   private function process($pitchCount, $poolCount, $gameTime, $startTime, array $teams) {
@@ -163,7 +167,7 @@ class DefaultForm extends FormBase {
     $index = 0;
     while (\count($gameList) > 0) {
       $index ++;
-      if ($index > 35) {
+      if ($index > 135) {
         break;
       }
       $game_count = \count($gameList);
@@ -173,6 +177,7 @@ class DefaultForm extends FormBase {
       if (\count($gameList[$pool_index]) == 0) {
         unset($gameList[$pool_index]);
       }
+      $gameList = array_values($gameList);
     }
 
     $_matches['pools'] = $pools;
