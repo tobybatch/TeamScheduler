@@ -8,6 +8,13 @@ team_scheduler.default_controller_agegroup:
   requirements:
       _role: 'authenticated'
 
+team_scheduler.default_controller_export:
+  path: '/team_scheduler/{id}/export'
+  defaults:
+    _controller: '\Drupal\team_scheduler\Controller\DefaultController::export'
+  requirements:
+      _role: 'authenticated'
+
 team_scheduler.default_form:
   path: '/team_scheduler/form/default'
   defaults:

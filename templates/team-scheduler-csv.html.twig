@@ -1,0 +1,23 @@
+METADATA
+"pitch_count", "{{ matches.pitch_count }}"
+"age_group", "{{ matches.age_group }}"
+"pool_count", "{{ matches.pool_count }}"
+"game_length_minutes", "{{ matches.game_length_minutes }}"
+"start_time", "{{ matches.start_time }}"
+
+POOLS
+{% for pool in matches.matches.pools %}
+"Pool {{ loop.index }}"
+  {% for team in pool %}
+    "{{ team }}"
+  {% endfor %}
+
+{% endfor %}
+
+PITCHES
+{% for pitch in matches.matches.pitches %}
+  "Pitch {{ loop.index }}"
+  {% for game in pitch %}
+    "{{ matches.matches.gameTimes[loop.index] | date('H:i') }}", "{{ game[0] }}", "{{ game[1] }}"
+  {% endfor %}
+{% endfor %}

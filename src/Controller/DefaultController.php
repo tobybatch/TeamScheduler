@@ -3,6 +3,7 @@ namespace Drupal\team_scheduler\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Form\FormState;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultController.
@@ -20,6 +21,7 @@ class DefaultController extends ControllerBase {
     $matches = False;
 
     if ($id) {
+      // TODO Abstract the file load
       $uri_stub = 'public://team_scheduler';
       $streamuri = $uri_stub . '/' . $id . '.json';
       $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties([
@@ -49,4 +51,44 @@ class DefaultController extends ControllerBase {
 
     return $render;
   }
+
+  public function export($id) {
+    // TODO Abstract the file load
+    $uri_stub = 'public://team_scheduler';
+    $streamuri = $uri_stub . '/' . $id . '.json';
+    $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties([
+      'uri' => $streamuri
+    ]);
+    $file = array_pop($files);
+    $data = json_decode(file_get_contents($file->getFileUri()), True);
+
+    $render = [
+      '#theme' => 'team_scheduler_csv',
+      '#matches' => $data,
+    ];
+
+    $csvdata = render($render);
+
+    $response = new Response();
+
+    $csv = True;
+    if ($csv) {
+      $response->headers->set('Content-Description', 'Submissions Export');
+      $response->headers->set('Content-Disposition', 'attachment; filename=' . $id. '.csv');
+      $response->headers->set('Content-Type', 'text/csv');
+      $response->setContent($csvdata);
+    } else {
+      $response->headers->set('Content-Type', 'application/javascript');
+      $response->setContent(json_encode($data));
+    }
+
+    $response->headers->set('Content-Transfer-Encoding', 'binary');
+    $response->headers->set('Expires', '0');
+    $response->headers->set('Pragma', 'no-cache');
+    $response->setStatusCode(200);
+
+    return $response;
+  }
 }
+
+// vim: set filetype=php expandtab tabstop=2 shiftwidth=2 autoindent smartindent:

@@ -147,7 +147,7 @@ class DefaultForm extends FormBase {
   private function process($pitchCount, $poolCount, $gameTime, $startTime, array $teams) {
     $_matches = [];
     // Sort the teams so we try to avoid teams in the same group
-    \sort($teams);
+    // \sort($teams);
 
     // Split teams into pools
     $gameTimes = $this->generateGameTimes($startTime, $gameTime);
@@ -192,7 +192,7 @@ class DefaultForm extends FormBase {
    * @param array $teams
    * @param boolean $shuffle
    */
-  private function generateGames(array $teams, $shuffle = false) {
+  private function generateGames(array $teams, $shuffle = true) {
     // for each team in the list
     // set up a game against the last team in the list
     $games = [];

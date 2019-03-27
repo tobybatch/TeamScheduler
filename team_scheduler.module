@@ -36,6 +36,11 @@ function team_scheduler_theme() {
         'matches' => null
       ]
     ],
+    'team_scheduler_csv' => [
+      'variables' => [
+        'matches' => null
+      ]
+    ],
     'team_scheduler_block' => [
       'variables' => [
         'saved_games' => null
