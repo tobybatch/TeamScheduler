@@ -38,6 +38,7 @@ class DefaultController extends ControllerBase {
       $form['teams']['#value'] = \implode("\n", $data['teams']);
 
       $matches = $data['matches'];
+      $matches['id'] = $id;
     }
 
     $render = [

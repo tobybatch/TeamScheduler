@@ -12,7 +12,7 @@
     </div>
     
     <div class='pitches'>
-        <h2>Pitches</h2>
+        <h2>Pitches (<a href="{{ path('team_scheduler.default_controller_export', { 'id': matches.id }) }}">Save as CSV</a>)</h2>
         {% for pitch in matches.pitches %}
             <div class="pitch">
                 <h3>Pitch {{ loop.index }}</h3>
